@@ -1,13 +1,17 @@
+import axios from "axios";
 import { useForm } from "react-hook-form";
 
 type MessageFormData = { message: string; }
-export function MyForm() {
+export default function MyForm() {
   const { register, handleSubmit, formState: { errors } } = useForm<MessageFormData>({
     defaultValues: {},
   });
 
-  const onSubmit = (data) => {
+  const onSubmit = (data:MessageFormData) => {
+    console.log(data)
     // Handle form data here
+    axios.post("http://localhost:8000/api/create-message",{"message":(data.message)})
+  
   };
 
   return (
